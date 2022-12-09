@@ -68,9 +68,8 @@ show_hint_text = Label(window, textvariable=hints_str, font=('FC Minimal', 28))
 show_hint_text.pack(pady=10)
 
 #กล่องให้กรอก guess
-textentry = customtkinter.CTkEntry(width=200,
-                    placeholder_text="Insert what's on your mind.", 
-                    text_font=("FC Minimal", 10), justify='center')
+textentry = customtkinter.CTkEntry(width=200, 
+                    text_font=("FC Minimal", 20), justify='center')
 textentry.pack(pady=10, padx=225)
 
 #ปุ่มกด submit พร้อมฟังก์ชันที่อัพเดต clue และสถานะของเกม
@@ -137,4 +136,3 @@ window.mainloop()
 
 #จบเกม
 print('End Game')
-
