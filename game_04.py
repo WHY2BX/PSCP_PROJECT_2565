@@ -130,7 +130,7 @@ def main():
         #print('Test Refresh')
         window.after(1000, main)
     else:
-        submit_btn['state'] = 'disable'
+        button['state'] = 'disable'
         print('Quitting...')
         window.quit()
 
