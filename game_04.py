@@ -118,8 +118,11 @@ def update_screen():
         status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
         textentry.delete(0, 'end')
 
-submit_btn = Button(window, text='Submit', command=update_screen)
-submit_btn.pack()
+button = customtkinter.CTkButton(text="Submit",
+                                    border_width=2,  # <- custom border_width
+                                    fg_color=None,  # <- no fg_color
+                                    command=update_screen)
+button.pack(pady=20, padx=225)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
 def main():
