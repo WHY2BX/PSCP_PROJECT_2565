@@ -21,13 +21,13 @@ window = Tk()
 window.title('Tum Kai')
 window.geometry('700x840')
 
+#bg
 image = Image.open("bgzaza.jpg")
 photo = ImageTk.PhotoImage(image)
   
 # Show image using label
 label1 = Label( window, image = photo)
 label1.place(x = 0, y = 0)
-
 
 #สถานะเกม
 game_end = False #เริ่มต้นเกมยังไม่จบ
