@@ -88,7 +88,7 @@ def onReturn(event):
     textentry_first.delete(0, 'end')
     
 
-#กล่องให้กรอก guess
+#กล่องให้กรอก guess ยังไม่ได้
 textentry_first = customtkinter.CTkEntry(width=200,
                     text_font=("FC Minimal", 20), justify='center')
 textentry_first.bind("<Return>", onReturn)
