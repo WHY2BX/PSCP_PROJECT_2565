@@ -11,7 +11,7 @@ bg_music = pygame.mixer.music.load('bg.mp3')
 correct_sound = pygame.mixer.Sound('correct.wav')
 wrong_sound = pygame.mixer.Sound('buzzer.wav')
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.3) #<-----ปรับเสียงbg(เป็นfloat) ปรับได้ตั้งเเต่0.0ถึง1.0
+pygame.mixer.music.set_volume(0.5) #<-----ปรับเสียงbg(เป็นfloat) ปรับได้ตั้งเเต่0.0ถึง1.0
 correct_sound.set_volume(0.5) #<-----ปรับเสียงeffect ถูก
 wrong_sound.set_volume(0.2) #<-----ปรับเสียงeffcet ผิด
 #สร้าง app window
