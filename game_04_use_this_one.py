@@ -28,12 +28,9 @@ window.geometry('700x840')
 
 #bg
 # window.config(bg = '#add123')
-
 # image = Image.open("bgzaza.jpg")
 # photo = ImageTk.PhotoImage(image)
 # window.wm_attributes('-transparentcolor','#add123')
-  
-# Show image using label
 # label1 = Label( window, image = photo)
 # label1.place(x = 0, y = 0)
 
@@ -56,11 +53,11 @@ show_status.pack(pady=20)
 
 #สร้าง words category hints
 word_dict = {
-    'x':
+    'xit':
         {'category': 'RJarn',
          'hints': ['ชอบจังคลิปเต้นเนี่ย', 'ปรับปรุงโลจิก', 'คำผวน']
         },
-    'y':
+    'sdy':
         {'category': 'Friend',
          'hints': ['ตะหลุ่ม', 'ตุ่มมง', 'พอเถอะสแว้ก']
         }
@@ -104,6 +101,7 @@ def update_clue(guess, secret_word, clue):
     for i in range(len(secret_word)):
         if guess == secret_word[i]:
             clue[i] = guess
+            textentry.delete(0, 'end')
 
     clue_str.set(' | '. join(clue))
     win = ''.join(clue) == secret_word
@@ -144,6 +142,7 @@ def update_screen(event):
                 clue_str.set(' | '.join(clue))
                 hints = word_dict[secret_word]['hints']
                 hints_str.set('\n'.join(hints))
+                textentry.delete(0, 'end')
     else:
         print('ผิดแล้ว ไอควาย หน้าโง่')
         lives -= 1
@@ -202,11 +201,12 @@ textentry.bind('<Return>', update_screen)
 textentry.pack(pady=10, padx=225)
     
 button = customtkinter.CTkButton(master=window, text="Submit",
-                                    border_width=2,  # <- custom border_width
-                                    background_corner_colors=None,
-                                    fg_color=None,  # <- no fg_color
-                                    corner_radius=10,
-                                    command=update_screen_2)
+                                bg_color = 'transparent',
+                                border_width=2,  # <- custom border_width
+                                border_spacing=0,
+                                fg_color=None,  # <- no fg_color
+                                corner_radius=10,
+                                command=update_screen_2)
 button.pack(pady=20, padx=225)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
