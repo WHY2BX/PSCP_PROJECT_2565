@@ -126,12 +126,55 @@ def update_screen(event):
             #print('เฉลยตึงๆ : ' + secret_word)
             score += 1
             print('Score : ' + str(score))
+            correct_sound.play()
             clue_str.set('Ahe! Ans : ' + secret_word)
             window.update()
             time.sleep(1) #ทำให้โปรแกรมค้างไว้ 1 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             textentry.delete(0, 'end')
+            
+            
+            if len(words) < 1:
+                game_end = True
+                clue_str.set('Congrats!')
+            else:
+                secret_word, clue = new_secret_word()
+                category_str.set(word_dict[secret_word]['category'])
+                clue_str.set(' | '.join(clue))
+                hints = word_dict[secret_word]['hints']
+                hints_str.set('\n'.join(hints))
+    else:
+        print('ผิดแล้ว ไอควาย หน้าโง่')
+        lives -= 1
+        wrong_sound.play()
+        textentry.delete(0, 'end')
+        if lives < 1:
+            clue_str.set('Game Over!')
+            game_end = True
+
+        status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
+        textentry.delete(0, 'end')
+
+def update_screen_2():
+    #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
+    global game_end, score, lives, secret_word, clue, hints
+
+    guess = textentry.get().strip() #Strip to remove whitespaces
+    guess = guess.lower() #lowercase
+
+    if guess in secret_word:
+        
+        win = update_clue(guess, secret_word, clue)
+        if win:
+            #print('เฉลยตึงๆ : ' + secret_word)
+            score += 1
+            print('Score : ' + str(score))
             correct_sound.play()
+            clue_str.set('Ahe! Ans : ' + secret_word)
+            window.update()
+            time.sleep(1) #ทำให้โปรแกรมค้างไว้ 1 วิ
+            status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
+            textentry.delete(0, 'end')
             
             if len(words) < 1:
                 game_end = True
@@ -164,7 +207,7 @@ button = customtkinter.CTkButton(text="Submit",
                                     background_corner_colors=None,
                                     fg_color=None,  # <- no fg_color
                                     corner_radius=10,
-                                    command=update_screen)
+                                    command=update_screen_2)
 button.pack(pady=20, padx=225)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
