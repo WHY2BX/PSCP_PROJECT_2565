@@ -3,6 +3,14 @@ from tkinter import *
 import random
 import time
 import customtkinter
+import pygame
+pygame.mixer.init()
+
+#instrumentals
+bg_music = pygame.mixer.music.load('bg.mp3')
+correct_sound = pygame.mixer.Sound('correct.wav')
+wrong_sound = pygame.mixer.Sound('buzzer.wav')
+pygame.mixer.music.play(-1)
 
 #สร้าง app window
 # Label = Tk.Label(text='Hello world')
@@ -84,7 +92,7 @@ def update_clue(guess, secret_word, clue):
 
 #กล่องให้กรอก guess 
 textentry = customtkinter.CTkEntry(width=200,
-                    text_font=("FC Minimal", 20), justify='center')
+                    text_font=("FC Minimal", 20), justify='center', corner_radius=15)
 
 def update_screen(event):
     #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
@@ -97,7 +105,7 @@ def update_screen(event):
         
         win = update_clue(guess, secret_word, clue)
         if win:
-            print('เฉลยตึงๆ : ' + secret_word)
+            #print('เฉลยตึงๆ : ' + secret_word)
             score += 1
             print('Score : ' + str(score))
             clue_str.set('Ahe! Ans : ' + secret_word)
@@ -105,6 +113,7 @@ def update_screen(event):
             time.sleep(1) #ทำให้โปรแกรมค้างไว้ 5 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             textentry.delete(0, 'end')
+            correct_sound.play()
             
             if len(words) < 1:
                 game_end = True
@@ -118,6 +127,7 @@ def update_screen(event):
     else:
         print('ผิดแล้ว ไอควาย หน้าโง่')
         lives -= 1
+        wrong_sound.play()
         textentry.delete(0, 'end')
         if lives < 1:
             clue_str.set('Game Over!')
@@ -132,6 +142,7 @@ textentry.pack(pady=10, padx=225)
 button = customtkinter.CTkButton(text="Submit",
                                     border_width=2,  # <- custom border_width
                                     fg_color=None,  # <- no fg_color
+                                    corner_radius=10,
                                     command=update_screen)
 button.pack(pady=20, padx=225)
 
