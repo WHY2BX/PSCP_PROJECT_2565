@@ -15,6 +15,7 @@ customtkinter.set_default_color_theme("blue")
 bg_music = pygame.mixer.music.load('bg.mp3')
 correct_sound = pygame.mixer.Sound('correct.wav')
 wrong_sound = pygame.mixer.Sound('buzzer.wav')
+
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.1) #<-----ปรับเสียงbg(เป็นfloat) ปรับได้ตั้งเเต่0.0ถึง1.0
 correct_sound.set_volume(0.1) #<-----ปรับเสียงeffect ถูก
@@ -199,8 +200,6 @@ def update_screen_2():
 
 textentry.bind('<Return>', update_screen)
 textentry.pack(pady=10, padx=225)
-
-
     
 button = customtkinter.CTkButton(text="Submit",
                                     border_width=2,  # <- custom border_width
