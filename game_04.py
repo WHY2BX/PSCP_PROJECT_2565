@@ -72,11 +72,6 @@ show_hint_text.pack()
 show_hint_text = Label(window, textvariable=hints_str, font=('FC Minimal', 28))
 show_hint_text.pack(pady=10)
 
-#กล่องให้กรอก guess
-textentry = customtkinter.CTkEntry(width=200, 
-                    text_font=("FC Minimal", 20), justify='center')
-textentry.pack(pady=10, padx=225)
-
 #ปุ่มกด submit พร้อมฟังก์ชันที่อัพเดต clue และสถานะของเกม
 def update_clue(guess, secret_word, clue):
     for i in range(len(secret_word)):
@@ -87,11 +82,23 @@ def update_clue(guess, secret_word, clue):
     win = ''.join(clue) == secret_word
     return win
 
+#กด return ด้วย enter + ลบข้อความเก่าออก
+def onReturn(event):
+    print('Return Pressed')
+    textentry_first.delete(0, 'end')
+    
+
+#กล่องให้กรอก guess
+textentry_first = customtkinter.CTkEntry(width=200,
+                    text_font=("FC Minimal", 20), justify='center')
+textentry_first.bind("<Return>", onReturn)
+textentry_first.pack(pady=10, padx=225)
+
 def update_screen():
     #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
-    global game_end, score, lives, secret_word, clue, hints
-    
-    guess = textentry.get().strip() #Strip to remove whitespaces
+    global game_end, score, lives, secret_word, clue, hints, textentry
+
+    guess = textentry_first.get().strip() #Strip to remove whitespaces
     guess = guess.lower() #lowercase
 
     if guess in secret_word:
@@ -102,7 +109,7 @@ def update_screen():
             print('Score : ' + str(score))
             clue_str.set('Ahe! Ans : ' + secret_word)
             window.update()
-            time.sleep(5) #ทำให้โปรแกรมค้างไว้ 5 วิ
+            time.sleep(1) #ทำให้โปรแกรมค้างไว้ 5 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             
             if len(words) < 1:
@@ -135,8 +142,7 @@ def main():
     if not game_end:
         #print('Test Refresh')
         window.after(1000, main)
-    # elif not game_end and win:
-    #     score += 1
+
     else:
         button['state'] = 'disable'
         print('Quitting...')

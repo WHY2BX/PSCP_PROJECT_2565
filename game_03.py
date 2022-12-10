@@ -7,7 +7,7 @@ import time
 #สร้าง app window
 # Label = Tk.Label(text='Hello world')
 window = Tk()
-window.title('Tum Kai')
+window.title('tum kai')
 window.geometry('700x840')
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
