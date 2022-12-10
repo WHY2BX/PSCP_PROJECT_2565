@@ -82,26 +82,19 @@ def update_clue(guess, secret_word, clue):
     win = ''.join(clue) == secret_word
     return win
 
-#กด return ด้วย enter + ลบข้อความเก่าออก
-def onReturn(event):
-    print('Return Pressed')
-    textentry_first.delete(0, 'end')
-    
-
-#กล่องให้กรอก guess ยังไม่ได้
-textentry_first = customtkinter.CTkEntry(width=200,
+#กล่องให้กรอก guess 
+textentry = customtkinter.CTkEntry(width=200,
                     text_font=("FC Minimal", 20), justify='center')
-textentry_first.bind("<Return>", onReturn)
-textentry_first.pack(pady=10, padx=225)
 
-def update_screen():
+def update_screen(event):
     #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
-    global game_end, score, lives, secret_word, clue, hints, textentry
+    global game_end, score, lives, secret_word, clue, hints
 
-    guess = textentry_first.get().strip() #Strip to remove whitespaces
+    guess = textentry.get().strip() #Strip to remove whitespaces
     guess = guess.lower() #lowercase
 
     if guess in secret_word:
+        
         win = update_clue(guess, secret_word, clue)
         if win:
             print('เฉลยตึงๆ : ' + secret_word)
@@ -111,6 +104,7 @@ def update_screen():
             window.update()
             time.sleep(1) #ทำให้โปรแกรมค้างไว้ 5 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
+            textentry.delete(0, 'end')
             
             if len(words) < 1:
                 game_end = True
@@ -124,12 +118,16 @@ def update_screen():
     else:
         print('ผิดแล้ว ไอควาย หน้าโง่')
         lives -= 1
+        textentry.delete(0, 'end')
         if lives < 1:
             clue_str.set('Game Over!')
             game_end = True
-        
+
         status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
         textentry.delete(0, 'end')
+
+textentry.bind('<Return>', update_screen)
+textentry.pack(pady=10, padx=225)
 
 button = customtkinter.CTkButton(text="Submit",
                                     border_width=2,  # <- custom border_width
