@@ -16,7 +16,12 @@ score = 0
 lives = 3
 
 #เเสดง score กับ lives บน window
+
 status_str = StringVar() #มาจาก Tkinter
+
+# status_str = customtkinter.CTkLabel(text = "Score: " + "%d" %score + " | " + "Lives: " + "♥"*lives, 
+#                                             text_font=('FC Minimal', 20))
+# status_str.pack(pady=10, padx=150)
 
 status_str.set('Score: '+ str(score) + ' | ' + 'Lives: ' + '♥'*lives)
 show_status = Label(window, textvariable=status_str, font=('FC Minimal', 20))
@@ -24,11 +29,11 @@ show_status.pack(pady=20)
 
 #สร้าง words category hints
 word_dict = {
-    'chatipho':
+    'x':
         {'category': 'RJarn',
          'hints': ['ชอบจังคลิปเต้นเนี่ย', 'ปรับปรุงโลจิก', 'คำผวน']
         },
-    'sirimongkol':
+    'y':
         {'category': 'Friend',
          'hints': ['ตะหลุ่ม', 'ตุ่มมง', 'พอเถอะสแว้ก']
         }
@@ -98,6 +103,7 @@ def update_screen():
             clue_str.set('Ahe! Ans : ' + secret_word)
             window.update()
             time.sleep(5) #ทำให้โปรแกรมค้างไว้ 5 วิ
+            status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             
             if len(words) < 1:
                 game_end = True
@@ -129,6 +135,8 @@ def main():
     if not game_end:
         #print('Test Refresh')
         window.after(1000, main)
+    # elif not game_end and win:
+    #     score += 1
     else:
         button['state'] = 'disable'
         print('Quitting...')
