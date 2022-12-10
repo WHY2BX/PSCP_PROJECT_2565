@@ -4,6 +4,7 @@ import random
 import time
 import customtkinter
 import pygame
+from PIL import Image, ImageTk
 pygame.mixer.init()
 
 #instrumentals
@@ -11,12 +12,22 @@ bg_music = pygame.mixer.music.load('bg.mp3')
 correct_sound = pygame.mixer.Sound('correct.wav')
 wrong_sound = pygame.mixer.Sound('buzzer.wav')
 pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.1) #<-----ปรับเสียงbg(เป็นfloat) ปรับได้ตั้งเเต่0.0ถึง1.0
+correct_sound.set_volume(0.5) #<-----ปรับเสียงeffect ถูก
+wrong_sound.set_volume(0.2) #<-----ปรับเสียงeffcet ผิด
 
 #สร้าง app window
-# Label = Tk.Label(text='Hello world')
 window = Tk()
 window.title('Tum Kai')
 window.geometry('700x840')
+
+image = Image.open("bgzaza.jpg")
+photo = ImageTk.PhotoImage(image)
+  
+# Show image using label
+label1 = Label( window, image = photo)
+label1.place(x = 0, y = 0)
+
 
 #สถานะเกม
 game_end = False #เริ่มต้นเกมยังไม่จบ
@@ -110,7 +121,7 @@ def update_screen(event):
             print('Score : ' + str(score))
             clue_str.set('Ahe! Ans : ' + secret_word)
             window.update()
-            time.sleep(1) #ทำให้โปรแกรมค้างไว้ 5 วิ
+            time.sleep(1) #ทำให้โปรแกรมค้างไว้ 1 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             textentry.delete(0, 'end')
             correct_sound.play()
@@ -142,6 +153,7 @@ textentry.pack(pady=10, padx=225)
 button = customtkinter.CTkButton(text="Submit",
                                     border_width=2,  # <- custom border_width
                                     fg_color=None,  # <- no fg_color
+                                    background_corner_colors=None,
                                     corner_radius=10,
                                     command=update_screen)
 button.pack(pady=20, padx=225)

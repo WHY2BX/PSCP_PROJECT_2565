@@ -6,7 +6,7 @@ import customtkinter
 
 #สร้าง app window
 # Label = Tk.Label(text='Hello world')
-window = Tk()
+tkinter = Tk()
 window.title('Tum Kai')
 window.geometry('700x840')
 
