@@ -25,7 +25,7 @@ window = Tk()
 window.title('Tum Kai')
 window.geometry('700x840')
 
-# #bg
+#bg
 # window.config(bg = '#add123')
 
 # image = Image.open("bgzaza.jpg")
