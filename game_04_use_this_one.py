@@ -110,8 +110,8 @@ def update_clue(guess, secret_word, clue):
     return win
 
 #กล่องให้กรอก guess 
-textentry = customtkinter.CTkEntry(width=200,
-                    text_font=("FC Minimal", 20), justify='center', corner_radius=15)
+textentry = customtkinter.CTkEntry(master=window ,width=200,
+                font=customtkinter.CTkFont("FC Minimal", size=20), justify='center', corner_radius=15)
 
 def update_screen(event):
     #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
@@ -201,7 +201,7 @@ def update_screen_2():
 textentry.bind('<Return>', update_screen)
 textentry.pack(pady=10, padx=225)
     
-button = customtkinter.CTkButton(text="Submit",
+button = customtkinter.CTkButton(master=window, text="Submit",
                                     border_width=2,  # <- custom border_width
                                     background_corner_colors=None,
                                     fg_color=None,  # <- no fg_color
