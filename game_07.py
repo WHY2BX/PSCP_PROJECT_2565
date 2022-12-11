@@ -143,7 +143,7 @@ word_dict = {
     'pemdas':
         {'category': 'basic programming',
          'hints': ['ลำดับการทำงานของเครื่องหมายทางคณิตศาสตร์\nโดยจะเรียงลำดับการทำงานจากซ้ายไปขวา']
-        },
+        }
     }
 
 words = list(word_dict.keys())
