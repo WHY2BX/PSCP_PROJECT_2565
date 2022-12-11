@@ -90,7 +90,7 @@ word_dict = {
         },
     'isnumeric()':
         {'category': 'string method',
-         'hints': ['จะคืนค่า True ถ้าหากอักขระทุกตัว\nบนstringเป็นตัวเลข']
+         'hints': ['จะคืนค่า True ถ้าหากอักขระทุกตัว\nบน string เป็นตัวเลข']
         },
     'lower()':
         {'category': 'string method',
