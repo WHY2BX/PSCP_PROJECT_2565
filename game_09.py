@@ -351,14 +351,6 @@ def main():
     else:
         button.configure(state="disabled")
         print('Quitting...')
-        exit_button = customtkinter.CTkButton(master=window, text="Exit",
-                                bg_color = 'transparent',
-                                border_width=2,  # <- custom border_width
-                                border_spacing=0,
-                                fg_color=None,  # <- no fg_color
-                                corner_radius=10,
-                                command= Close)
-        exit_button.pack(pady=20)
         restart_button = customtkinter.CTkButton(master=window, text="Play again?",
                                 bg_color = 'transparent',
                                 border_width=2,  # <- custom border_width
@@ -367,6 +359,14 @@ def main():
                                 corner_radius=10,
                                 command= restart_program)
         restart_button.pack(pady=20)
+        exit_button = customtkinter.CTkButton(master=window, text="Exit",
+                                bg_color = 'transparent',
+                                border_width=2,  # <- custom border_width
+                                border_spacing=0,
+                                fg_color=None,  # <- no fg_color
+                                corner_radius=10,
+                                command= Close)
+        exit_button.pack(pady=20)
 window.after(1000, main)
 window.mainloop()
 
