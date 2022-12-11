@@ -60,7 +60,7 @@ status_str = StringVar() #มาจาก Tkinter
 
 status_str.set('Score: '+ str(score) + ' | ' + 'Lives: ' + '♥'*lives)
 show_status = Label(window, textvariable=status_str, font=('FC Minimal', 20), bg = '#f4d575')
-show_status.pack(pady=20)
+show_status.pack(pady=30)
 
 #สร้าง words category hints
 word_dict = {
@@ -200,12 +200,12 @@ secret_word, clue = new_secret_word()
 category_str = StringVar()
 category_str.set(word_dict[secret_word]['category'])
 show_category = Label(window, textvariable=category_str, font=('FC Minimal', 20), bg = '#f4d575') 
-show_category.pack(pady=10)
+show_category.pack(pady=20)
 
 clue_str = StringVar()
 clue_str.set(' | '.join(clue))
 show_clue = Label(window, textvariable=clue_str, font=('FC Minimal', 35), bg = '#f4d575')
-show_clue.pack(padx=10, pady=10)
+show_clue.pack(padx=10, pady=20)
 
 #เเสดง hints
 hints = word_dict[secret_word]['hints']
@@ -218,7 +218,7 @@ hints_str.set('\n'.join(hints))
 show_hint_text = Label(window, textvariable=hints_text, font=('FC Minimal', 20), bg = '#f4d575')
 show_hint_text.pack()
 show_hint_text = Label(window, textvariable=hints_str, font=('FC Minimal', 28), bg = '#f4d575')
-show_hint_text.pack(pady=10)
+show_hint_text.pack(pady=20)
 
 #ปุ่มกด submit พร้อมฟังก์ชันที่อัพเดต clue และสถานะของเกม
 def update_clue(guess, secret_word, clue):
@@ -283,21 +283,20 @@ def update_screen(event=None):
         textentry.delete(0, 'end')
 
 textentry.bind('<Return>', update_screen)
-textentry.pack(pady=10, padx=225)
+textentry.pack(pady=20, padx=0)
 
 #frame - เอาไว้เติมสีของ CTK button
-frame2 = Frame( window, bg = "#f4d575", border=2, borderwidth=1)
+frame2 = Frame(window, bg = "#f4d575", border=2, borderwidth=1, )
 frame2.pack(pady = 0)
 
 button = customtkinter.CTkButton(master=frame2, text="Submit",
                                 bg_color = 'transparent',
                                 border_width=1,  # <- custom border_width
-                                border_spacing=0,
                                 fg_color= 'white',  # <- no fg_color
                                 corner_radius=10,
                                 text_color = 'black',
                                 command=update_screen)
-button.pack(pady=20, padx=225)
+button.pack(pady=0, padx=0)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
 def restart_program():
@@ -318,23 +317,25 @@ def main():
 
     else:
         button.configure(state="disabled")
+        button.pack_forget()
         print('Quitting...')
-        restart_button = customtkinter.CTkButton(master=window, text="Play again?",
+        restart_button = customtkinter.CTkButton(master=frame2, text="Play Again",
                                 bg_color = 'transparent',
-                                border_width=2,  # <- custom border_width
-                                border_spacing=0,
-                                fg_color=None,  # <- no fg_color
+                                border_width=1,  # <- custom border_width
+                                fg_color= 'green',  # <- no fg_color
                                 corner_radius=10,
-                                command= restart_program)
-        restart_button.pack(pady=20)
-        exit_button = customtkinter.CTkButton(master=window, text="Exit",
+                                text_color = 'white',
+                                command=restart_program)
+        restart_button.pack(pady=30)
+        exit_button = customtkinter.CTkButton(master=frame2, text="Exit",
                                 bg_color = 'transparent',
-                                border_width=2,  # <- custom border_width
-                                border_spacing=0,
-                                fg_color=None,  # <- no fg_color
+                                border_width=1,  # <- custom border_width
+                                fg_color= 'red',  # <- no fg_color
                                 corner_radius=10,
+                                text_color = 'white',
                                 command= Close)
-        exit_button.pack(pady=20)
+        exit_button.pack(pady=30)
+
 window.after(1000, main)
 window.mainloop()
 
