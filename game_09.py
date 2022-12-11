@@ -16,7 +16,7 @@ customtkinter.set_default_color_theme("blue")
 
 
 #instrumentals
-bg_music = pygame.mixer.music.load('bg.mp3')
+bg_music = pygame.mixer.music.load('bg.wav')
 correct_sound = pygame.mixer.Sound('correct.wav')
 wrong_sound = pygame.mixer.Sound('buzzer.wav')
 
