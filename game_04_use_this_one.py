@@ -8,7 +8,7 @@ from PIL import Image, ImageTk
 
 pygame.mixer.init()
 
-customtkinter.set_appearance_mode("System")
+customtkinter.set_appearance_mode("Light")
 customtkinter.set_default_color_theme("blue")
 
 #instrumentals
@@ -23,12 +23,15 @@ wrong_sound.set_volume(0.1) #<-----ปรับเสียงeffcet ผิด
 
 #สร้าง app window
 window = Tk()
-window.title('Tum Kai')
+window.title('<e> Quiz')
 window.geometry('700x840')
+
+window.maxsize(700, 840)
+window.minsize(700, 840)
 
 #bg
 # window.config(bg = '#add123')
-# image = Image.open("bgzaza.jpg")
+# image = Image.open("test_bg_01.png")
 # photo = ImageTk.PhotoImage(image)
 # window.wm_attributes('-transparentcolor','#add123')
 # label1 = Label( window, image = photo)
@@ -53,14 +56,70 @@ show_status.pack(pady=20)
 
 #สร้าง words category hints
 word_dict = {
-    'xit':
-        {'category': 'RJarn',
-         'hints': ['ชอบจังคลิปเต้นเนี่ย', 'ปรับปรุงโลจิก', 'คำผวน']
+    'append()':
+        {'category': 'list method',
+         'hints': ['สามารถเพิ่มค่าเข้าไปใน list ได้']
         },
-    'sdy':
-        {'category': 'Friend',
-         'hints': ['ตะหลุ่ม', 'ตุ่มมง', 'พอเถอะสแว้ก']
-        }
+    'insert()':
+        {'category': 'list method',
+         'hints': ['สามารถเเทรกค่าเข้าไปใน list\nตามตำเเหน่งที่ต้องการได้']
+        },
+    'sort()':
+        {'category': 'list method',
+         'hints': ['สามารถเเรียงลำดับค่าใน list ได้']
+        },
+    'index()':
+        {'category': 'list method',
+         'hints': ['สามารถระบุตำเเหน่งของค่าที่ต้องการใน list ได้']
+        },
+    'capitalize()':
+        {'category': 'string method',
+         'hints': ['สามารถเปลี่ยนตัวอักษรตัวเเรก\nเป็นตัวพิมพ์ใหญ่ได้']
+        },
+    'find()':
+        {'category': 'string method',
+         'hints': ['สามารถระบุตำเเหน่งของค่าที่ต้องการได้']
+        },
+    'isnumeric()':
+        {'category': 'string method',
+         'hints': ['จะคืนค่า True ถ้าหากอักขระทุกตัว\nบนstringเป็นตัวเลข']
+        },
+    'lower()':
+        {'category': 'string method',
+         'hints': ['เปลี่ยน string ทุกตัวเป็นตัวพิมพ์เล็ก']
+        },
+    'upper()':
+        {'category': 'string method',
+         'hints': ['เปลี่ยน string ทุกตัวเป็นตัวพิมพ์ใหญ่']
+        },
+    'swapcase()':
+        {'category': 'string method',
+         'hints': ['เปลี่ยน string ที่เป็นตัวพิมพ์เล็กเป็นตัวพิมพ์ใหญ่\nเเละเปลี่ยนตัวพิมพ์ใหญ่เป็นตัวพิมพ์เล็ก']
+        },
+    'get()':
+        {'category': 'dict method',
+         'hints': ['คืนค่า value ของ key ที่ระบุ']
+        },
+    'items()':
+        {'category': 'dict method',
+         'hints': ['คืนค่าออกมาเป็น list ที่ประกอบไปด้วย\n tuple ที่มี key เเละ value อยู่กันเป็นคู่']
+        },
+    'keys()':
+        {'category': 'dict method',
+         'hints': ['คืนค่าออกมาเป็น keys ของ dictionary\nที่ระบุโดยออกมาในรูปเเบบ list']
+        },
+    'pop()':
+        {'category': 'dict method',
+         'hints': ['ลบ key เเละ value ของมันตามที่ระบุ']
+        },
+    'update()':
+        {'category': 'dict method',
+         'hints': ['เพิ่มค่าใน dictionary ตาม key เเละ values ที่ระบุ']
+        },
+    'values()':
+        {'category': 'dict method',
+         'hints': ['คืนค่าออกมาเป็น values ทุกตัวที่อยู่ใน dict']
+        },
     }
 
 words = list(word_dict.keys())
