@@ -29,6 +29,10 @@ window.geometry('700x840')
 window.maxsize(700, 840)
 window.minsize(700, 840)
 
+#icon
+icon = PhotoImage(file = 'icon.jpg')
+window.iconphoto(False, icon)
+
 #bg
 # window.config(bg = '#add123')
 # image = Image.open("test_bg_01.png")
