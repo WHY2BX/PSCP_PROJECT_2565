@@ -143,7 +143,7 @@ secret_word, clue = new_secret_word()
 #แสดง category, clue บน window
 category_str = StringVar()
 category_str.set(word_dict[secret_word]['category'])
-show_category = Label(window, textvariable=category_str, font=('FC Minimal', 20)) 
+show_category = Label(window, textvariable=category_str, font=('FC Minimal', 20))
 show_category.pack(pady=10)
 
 clue_str = StringVar()
@@ -278,9 +278,6 @@ button.pack(pady=20, padx=225)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
 def restart_program():
-    """Restarts the current program.
-    Note: this function does not return. Any cleanup action (like
-    saving data) must be done before calling this function."""
     python = sys.executable
     os.execl(python, python, * sys.argv)
 
@@ -295,14 +292,6 @@ def main():
     else:
         button.configure(state="disabled")
         print('Quitting...')
-        exit_button = customtkinter.CTkButton(master=window, text="Exit",
-                                bg_color = 'transparent',
-                                border_width=2,  # <- custom border_width
-                                border_spacing=0,
-                                fg_color=None,  # <- no fg_color
-                                corner_radius=10,
-                                command= Close)
-        exit_button.pack(pady=20)
         restart_button = customtkinter.CTkButton(master=window, text="Play again?",
                                 bg_color = 'transparent',
                                 border_width=2,  # <- custom border_width
@@ -311,6 +300,14 @@ def main():
                                 corner_radius=10,
                                 command= restart_program)
         restart_button.pack(pady=20)
+        exit_button = customtkinter.CTkButton(master=window, text="Exit",
+                                bg_color = 'transparent',
+                                border_width=2,  # <- custom border_width
+                                border_spacing=0,
+                                fg_color=None,  # <- no fg_color
+                                corner_radius=10,
+                                command= Close)
+        exit_button.pack(pady=20)
 window.after(1000, main)
 window.mainloop()
 
