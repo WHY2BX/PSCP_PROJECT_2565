@@ -43,15 +43,12 @@ window.wm_attributes('-transparentcolor','#add123')
 label1 = Label( window, image = photo)
 label1.place(x = 0, y = 0)
 
-
-
 #สถานะเกม
 game_end = False #เริ่มต้นเกมยังไม่จบ
 score = 0
 lives = 3
 
 #เเสดง score กับ lives บน window
-
 status_str = StringVar() #มาจาก Tkinter
 
 # status_str = customtkinter.CTkLabel(text = "Score: " + "%d" %score + " | " + "Lives: " + "♥"*lives, 
@@ -294,8 +291,7 @@ button = customtkinter.CTkButton(master=frame2, text="Submit",
                                 border_width=1,  # <- custom border_width
                                 fg_color= 'white',  # <- no fg_color
                                 corner_radius=10,
-                                text_color = 'black',
-                                command=update_screen)
+                                text_color = 'black')
 button.pack(pady=0, padx=0)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
@@ -319,6 +315,7 @@ def main():
         button.configure(state="disabled")
         button.pack_forget()
         print('Quitting...')
+        
         restart_button = customtkinter.CTkButton(master=frame2, text="Play Again",
                                 bg_color = 'transparent',
                                 border_width=1,  # <- custom border_width
