@@ -291,7 +291,8 @@ button = customtkinter.CTkButton(master=frame2, text="Submit",
                                 border_width=1,  # <- custom border_width
                                 fg_color= 'white',  # <- no fg_color
                                 corner_radius=10,
-                                text_color = 'black')
+                                text_color = 'black',
+                                command=update_screen)
 button.pack(pady=0, padx=0)
 
 #โปรแกรมหลักที่ check ว่าจบเกมแล้วหรือยัง
