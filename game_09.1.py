@@ -46,7 +46,7 @@ label1.place(x = 0, y = 0)
 #สถานะเกม
 game_end = False #เริ่มต้นเกมยังไม่จบ
 score = 0
-lives = 3
+lives = 5
 
 #เเสดง score กับ lives บน window
 status_str = StringVar() #มาจาก Tkinter
@@ -202,7 +202,7 @@ secret_word, clue = new_secret_word()
 
 #แสดง category, clue บน window
 category_str = StringVar()
-category_str.set(word_dict[secret_word]['category'])
+category_str.set('[ ' + word_dict[secret_word]['category'] + ' ]')
 show_category = Label(window, textvariable=category_str, font=('FC Minimal', 20), bg = '#f4d575') 
 show_category.pack(pady=20)
 
@@ -210,6 +210,11 @@ clue_str = StringVar()
 clue_str.set(' | '.join(clue))
 show_clue = Label(window, textvariable=clue_str, font=('FC Minimal', 35), bg = '#f4d575')
 show_clue.pack(padx=10, pady=20)
+
+#congrats txt
+congrats_str = StringVar()
+congrats_str.set('Congrats! ✓')
+congrats = Label(window, textvariable=congrats_str, font=('FC Minimal', 50), bg = '#f4d575')
 
 #เเสดง hints
 hints = word_dict[secret_word]['hints']
@@ -223,6 +228,8 @@ show_hint_text = Label(window, textvariable=hints_text, font=('FC Minimal', 20),
 show_hint_text.pack()
 show_hint_text = Label(window, textvariable=hints_str, font=('FC Minimal', 28), bg = '#f4d575')
 show_hint_text.pack(pady=20)
+
+
 
 #ปุ่มกด submit พร้อมฟังก์ชันที่อัพเดต clue และสถานะของเกม
 def update_clue(guess, secret_word, clue):
@@ -257,19 +264,27 @@ def update_screen(event=None):
             print('เฉลยตึงๆ : ' + secret_word)
             score += 1
             print('Score : ' + str(score))
+            hints_text.set('')
+            hints_str.set('')
             correct_sound.play()
-            clue_str.set('Ahe! Ans : ' + secret_word)
+            clue_str.set('Right✓\nans =' + secret_word)
             window.update()
             time.sleep(1) #ทำให้โปรแกรมค้างไว้ 1 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             textentry.delete(0, 'end')
             
             if len(words) < 1:
+                
                 game_end = True
-                clue_str.set('Congrats!')
+                category_str.set('\n')
+                clue_str.set('🎉\nCongrats\nYou win!')
+                
+                #congrats txt
+                # congrats.pack(pady=5)
+                
             else:
                 secret_word, clue = new_secret_word()
-                category_str.set(word_dict[secret_word]['category'])
+                category_str.set('[' + word_dict[secret_word]['category'] + ']')
                 clue_str.set(' | '.join(clue))
                 hints = word_dict[secret_word]['hints']
                 hints_str.set('\n'.join(hints))
@@ -280,7 +295,7 @@ def update_screen(event=None):
         wrong_sound.play()
         textentry.delete(0, 'end')
         if lives < 1:
-            clue_str.set('Gameover')
+            clue_str.set('☠ Gameover ☠')
             hints_text.set('the answer is : ')
             hints_str.set(secret_word)
             game_end = True
@@ -321,7 +336,10 @@ def main():
         window.after(1000, main)
 
     else:
+        pygame.mixer.music.stop()
         button.configure(state="disabled")
+        # textentry.pack(pady=0, padx=0)
+        # button.pack(pady=0, padx=0)
         button.pack_forget()
         textentry.pack_forget()
         print('Quitting...')
@@ -332,7 +350,7 @@ def main():
                                 corner_radius=10,
                                 text_color = 'white',
                                 command=restart_program)
-        restart_button.pack(pady=30)
+        restart_button.pack(pady=0, padx=0)
         exit_button = customtkinter.CTkButton(master=frame2, text="Exit",
                                 bg_color = 'transparent',
                                 border_width=1,  # <- custom border_width
@@ -340,7 +358,7 @@ def main():
                                 corner_radius=10,
                                 text_color = 'white',
                                 command= Close)
-        exit_button.pack(pady=30)
+        exit_button.pack(pady=10, padx=0)
 
 window.after(1000, main)
 window.mainloop()
