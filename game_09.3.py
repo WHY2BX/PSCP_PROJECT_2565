@@ -8,7 +8,6 @@ import sys
 import os
 from PIL import Image, ImageTk
 
-
 customtkinter.set_appearance_mode("Light")
 customtkinter.set_default_color_theme("blue")
 
@@ -264,7 +263,7 @@ def update_screen(event=None):
             print('Score : ' + str(score))
             hints_text.set('')
             hints_str.set('')
-            clue_str.set('Right✓\nans =' +" "+ secret_word)
+            clue_str.set('Right ✓\nans =' +" "+ secret_word)
             window.update()
             time.sleep(2) #ทำให้โปรแกรมค้างไว้ 2 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
