@@ -20,6 +20,7 @@ wrong_sound = pygame.mixer.Sound('buzzer.wav')
 keyboard_sound = pygame.mixer.Sound('keyboard.wav')
 dead_sound = pygame.mixer.Sound('negative.wav')
 pygame.mixer.music.play(-1)
+keyboard_sound.set_volume(0.2)
 pygame.mixer.music.set_volume(0.1) #<-----ปรับเสียงbg(เป็นfloat) ปรับได้ตั้งเเต่0.0ถึง1.0
 correct_sound.set_volume(0.1) #<-----ปรับเสียงeffect ถูก
 wrong_sound.set_volume(0.1) #<-----ปรับเสียงeffcet ผิด
@@ -37,11 +38,9 @@ icon = PhotoImage(file = 'icon.jpg')
 window.iconphoto(False, icon)
 
 #bg
-window.config(bg = '#add123')
 image = Image.open("test_bg_01.png")
 photo = ImageTk.PhotoImage(image)
-window.wm_attributes('-transparentcolor','#add123')
-label1 = Label( window, image = photo)
+label1 = Label(window, image = photo)
 label1.place(x = 0, y = 0)
 
 #สถานะเกม
@@ -224,13 +223,10 @@ hints_text.set('hints')
 hints_str = StringVar()
 hints_str.set('\n'.join(hints))
 
-
 show_hint_text = Label(window, textvariable=hints_text, font=('FC Minimal', 20), bg = '#f4d575')
 show_hint_text.pack()
 show_hint_text = Label(window, textvariable=hints_str, font=('FC Minimal', 28), bg = '#f4d575')
 show_hint_text.pack(pady=20)
-
-
 
 #ปุ่มกด submit พร้อมฟังก์ชันที่อัพเดต clue และสถานะของเกม
 def update_clue(guess, secret_word, clue):
@@ -254,7 +250,7 @@ textentry = customtkinter.CTkEntry(master=frame1 ,width=200,
 def update_screen(event=None):
     #ประกาศตัวแปรพวกนี้ให้เป็น global เพื่อให้ฟังก์ชันนี้เข้าถึงตัวแปรใน command ได้
     global game_end, score, lives, secret_word, clue, hints
-
+    
     guess = textentry.get().strip() #Strip to remove whitespaces
     guess = guess.lower() #lowercase
 
@@ -264,12 +260,13 @@ def update_screen(event=None):
         if win:
             print('เฉลยตึงๆ : ' + secret_word)
             score += 1
+            correct_sound.play()
             print('Score : ' + str(score))
             hints_text.set('')
             hints_str.set('')
             clue_str.set('Right✓\nans =' +" "+ secret_word)
             window.update()
-            time.sleep(1) #ทำให้โปรแกรมค้างไว้ 1 วิ
+            time.sleep(2) #ทำให้โปรแกรมค้างไว้ 2 วิ
             status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
             textentry.delete(0, 'end')
             
@@ -285,6 +282,8 @@ def update_screen(event=None):
                 # congrats.pack(pady=5)
                 
             else:
+                
+                hints_text.set('hints')
                 secret_word, clue = new_secret_word()
                 category_str.set('[' + word_dict[secret_word]['category'] + ']')
                 clue_str.set(' | '.join(clue))
