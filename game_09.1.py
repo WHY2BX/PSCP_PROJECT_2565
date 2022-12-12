@@ -194,9 +194,11 @@ def new_secret_word():
 secret_word, clue = new_secret_word()
 
 #เเสดง คำตอบ inwza
-ans_str = StringVar()
-ans_str.set(secret_word)
-show_ans = Label(window, textvariable=ans_str, font=('FC Minimal', 20), bg = '#f4d575')
+# ans_str = StringVar()
+# ans_str.set(secret_word)
+# show_ans = Label(window, textvariable=ans_str, font=('FC Minimal', 20), bg = '#f4d575')
+# show_ans.pack(padx=10, pady=20)
+
 
 #แสดง category, clue บน window
 category_str = StringVar()
@@ -273,12 +275,14 @@ def update_screen(event=None):
                 hints_str.set('\n'.join(hints))
                 textentry.delete(0, 'end')
     else:
-        print('ผิดแล้ว ไอควาย หน้าโง่')
+        print('wrong')
         lives -= 1
         wrong_sound.play()
         textentry.delete(0, 'end')
         if lives < 1:
-            clue_str.set('Game Over!')
+            clue_str.set('Gameover')
+            hints_text.set('the answer is : ')
+            hints_str.set(secret_word)
             game_end = True
         status_str.set('Score : ' + str(score) + ' | ' + 'Lives: ' + '♥'*lives)
         textentry.delete(0, 'end')
@@ -317,9 +321,9 @@ def main():
         window.after(1000, main)
 
     else:
-        show_ans.pack(pady=20)
         button.configure(state="disabled")
         button.pack_forget()
+        textentry.pack_forget()
         print('Quitting...')
         restart_button = customtkinter.CTkButton(master=frame2, text="Play Again",
                                 bg_color = 'transparent',
